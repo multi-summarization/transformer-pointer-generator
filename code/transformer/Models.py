@@ -5,9 +5,6 @@ import numpy as np
 from transformer.Layers import EncoderLayer, DecoderLayer
 
 
-__author__ = "Yu-Hsiang Huang"
-
-
 def get_pad_mask(seq, pad_idx):
     return (seq != pad_idx).unsqueeze(-2)
 
@@ -22,7 +19,7 @@ def get_subsequent_mask(seq):
 
 class PositionalEncoding(nn.Module):
 
-    def __init__(self, d_hid, n_position=200):
+    def __init__(self, d_hid, n_position=5000):
         super(PositionalEncoding, self).__init__()
 
         # Not a parameter
@@ -50,7 +47,7 @@ class Encoder(nn.Module):
 
     def __init__(
             self, n_src_vocab, d_word_vec, n_layers, n_head, d_k, d_v,
-            d_model, d_inner, pad_idx, dropout=0.1, n_position=200, scale_emb=False):
+            d_model, d_inner, pad_idx, dropout=0.1, n_position=5000, scale_emb=False):
 
         super().__init__()
 

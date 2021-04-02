@@ -26,7 +26,9 @@ class ScheduledOptim():
     def _get_lr_scale(self):
         d_model = self.d_model
         n_steps, n_warmup_steps = self.n_steps, self.n_warmup_steps
-        return (d_model ** -0.5) * min(n_steps ** (-0.5), n_steps * n_warmup_steps ** (-1.5))
+        return np.power(d_model, -0.5) * np.min([
+            np.power(n_steps, -0.5),
+            np.power(n_warmup_steps, -1.5) * n_steps])
 
 
     def _update_learning_rate(self):
